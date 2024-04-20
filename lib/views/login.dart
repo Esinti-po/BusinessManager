@@ -217,15 +217,15 @@ class Login extends StatelessWidget {
 
         if (loggedIn == 1) {
           String role = serverResponse["role"];
-          int userId = serverResponse['user_id'];
+          // int userId = serverResponse['user_id'];
           myPres.getValue("Username").then((value) {
             username.text = value;
           });
 
           if (role == "Business Owner") {
-            await Get.offAndToNamed("/home", arguments: userId);
+            await Get.offAndToNamed("/home");
           } else if (role == "Sales Person") {
-            Get.offAndToNamed("/userHome", arguments: userId);
+            Get.offAndToNamed("/userHome");
           } else {
             Get.defaultDialog(
               middleText: "Unknown role: $role",

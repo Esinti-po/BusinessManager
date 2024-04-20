@@ -14,6 +14,7 @@ class AddToSalesDialog extends StatefulWidget {
       {super.key, required this.product, required this.userId});
 
   @override
+  // ignore: library_private_types_in_public_api
   _AddToSalesDialogState createState() => _AddToSalesDialogState();
 }
 
