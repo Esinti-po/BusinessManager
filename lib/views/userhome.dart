@@ -7,16 +7,13 @@ import 'package:BUSINESS_MANAGER/views/sales.dart';
 import 'package:BUSINESS_MANAGER/views/userstock.dart';
 import 'package:get/get.dart';
 
-var screens = [
-  const Sales(),
-  const Expenses(),
-  const UserStock(),
-];
-
 final UserController userController = Get.put(UserController());
 
 class UserHome extends StatefulWidget {
-  const UserHome({super.key});
+  final int userId;
+  final int storeId;
+
+  const UserHome({super.key, required this.userId, required this.storeId});
 
   @override
   State<UserHome> createState() => _UserHomeState();
@@ -24,6 +21,18 @@ class UserHome extends StatefulWidget {
 
 class _UserHomeState extends State<UserHome> {
   int selectedIndex = 0;
+  late final List<Widget> screens;
+
+  @override
+  void initState() {
+    super.initState();
+    screens = [
+      Sales(userId: widget.userId),
+      Expenses(userId: widget.userId),
+      UserStock(userId: widget.userId),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

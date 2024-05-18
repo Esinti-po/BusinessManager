@@ -14,7 +14,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 final SalesController salesController = Get.put(SalesController());
 
 class Sales extends StatefulWidget {
-  const Sales({super.key});
+  final int userId;
+  const Sales({super.key, required this.userId});
 
   @override
   State<Sales> createState() => _SalesState();

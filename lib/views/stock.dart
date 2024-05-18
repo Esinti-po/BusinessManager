@@ -16,7 +16,8 @@ final StockController stockController = Get.put(StockController());
 
 class Stock extends StatefulWidget {
   final int userId;
-  const Stock({super.key, required this.userId});
+  final int storeId;
+  const Stock({super.key, required this.userId, required this.storeId});
 
   @override
   State<Stock> createState() => _StockState();
@@ -24,6 +25,7 @@ class Stock extends StatefulWidget {
 
 class _StockState extends State<Stock> {
   late int userId;
+  late int storeId;
   bool isLoading = true;
   var stockDataList = stockController.dataList;
   final TextEditingController _productNameController = TextEditingController();
@@ -36,6 +38,7 @@ class _StockState extends State<Stock> {
   void initState() {
     super.initState();
     userId = widget.userId;
+    storeId = widget.storeId;
     fetchStock();
   }
 
@@ -276,7 +279,7 @@ class _StockState extends State<Stock> {
                           backgroundColor: primaryColor,
                           foregroundColor: appBlack),
                       onPressed: () {
-                        Navigator.of(context).pop(); 
+                        Navigator.of(context).pop();
                         updateStock(productName);
                       },
                       child: const CustomText(
@@ -373,6 +376,7 @@ class _StockState extends State<Stock> {
         'buying_price': _priceController.text.trim(),
         'selling_price': _spriceController.text.trim(),
         'user_id': userId.toString(),
+        'store_id': storeId.toString(),
       };
       response = await http.post(
         Uri.parse(

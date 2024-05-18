@@ -7,10 +7,31 @@ import 'package:get/get.dart';
 
 class Routes {
   static var routes = [
-    GetPage(name: "/login", page: () => const Login()),
-    GetPage(name: "/recover", page: () => const PasswordRecoverScreen()),
-    GetPage(name: "/userHome", page: () => const UserHome()),
-    GetPage(name: "/home", page: () => const Home()),
-    GetPage(name: "/registration", page: () => const RegistrationPage()),
+    GetPage(
+      name: "/login",
+      page: () => const Login(),
+    ),
+    GetPage(
+      name: "/recover",
+      page: () => const PasswordRecoverScreen(),
+    ),
+    GetPage(
+      name: "/userHome",
+      page: ({arguments}) => UserHome(
+        userId: arguments['userId'],
+        storeId: arguments['storeId'],
+      ),
+    ),
+    GetPage(
+      name: "/home",
+      page: ({arguments}) => Home(
+        userId: arguments['userId'],
+        storeId: arguments['storeId'],
+      ),
+    ),
+    GetPage(
+      name: "/registration",
+      page: () => const RegistrationPage(),
+    ),
   ];
 }

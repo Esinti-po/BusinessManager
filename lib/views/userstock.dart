@@ -13,7 +13,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 final StockController stockController = Get.put(StockController());
 
 class UserStock extends StatefulWidget {
-  const UserStock({super.key});
+  final int userId;
+  const UserStock({super.key, required this.userId});
 
   @override
   State<UserStock> createState() => _UserStockState();
@@ -52,10 +53,15 @@ class _UserStockState extends State<UserStock> {
     }
   }
 
-  void _showAddToSalesDialog(UserStockModel product) {
+  void _showAddToSalesDialog(
+    UserStockModel product,
+  ) {
     showDialog(
       context: context,
-      builder: (context) => AddToSalesDialog(product: product),
+      builder: (context) => AddToSalesDialog(
+        product: product,
+        userId: widget.userId,
+      ),
     );
   }
 

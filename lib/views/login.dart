@@ -217,15 +217,25 @@ class Login extends StatelessWidget {
 
         if (loggedIn == 1) {
           String role = serverResponse["role"];
-          // int userId = serverResponse['user_id'];
+          int userId = serverResponse['user_id'];
+          // If you have other arguments like storeId, you can fetch it here
+          int storeId = serverResponse['store_id'];
+
           myPres.getValue("Username").then((value) {
             username.text = value;
           });
 
+          // Pass arguments as a Map
+          var arguments = {
+            'userId': userId,
+            'storeId': storeId,
+            // Add any other arguments you need to pass
+          };
+
           if (role == "Business Owner") {
-            await Get.offAndToNamed("/home");
+            Get.offAndToNamed("/home", arguments: arguments);
           } else if (role == "Sales Person") {
-            Get.offAndToNamed("/userHome");
+            Get.offAndToNamed("/userHome", arguments: arguments);
           } else {
             Get.defaultDialog(
               middleText: "Unknown role: $role",

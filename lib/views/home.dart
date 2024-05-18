@@ -8,17 +8,13 @@ import 'package:BUSINESS_MANAGER/views/ownersales.dart';
 import 'package:BUSINESS_MANAGER/views/stock.dart';
 import 'package:get/get.dart';
 
-var screens = [
-  const DashBoard(),
-  const OwnerSales(),
-  const OwnerExpenses(),
-  const Stock(),
-];
-
 HomeController homeController = Get.put(HomeController());
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final int userId;
+  final int storeId;
+
+  const Home({super.key, required this.userId, required this.storeId});
 
   @override
   _HomeState createState() => _HomeState();
@@ -26,6 +22,21 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int selectedIndex = 0;
+  late final List<Widget> screens;
+
+  @override
+  void initState() {
+    super.initState();
+    screens = [
+      const DashBoard(),
+      const OwnerSales(),
+      const OwnerExpenses(),
+      Stock(
+        userId: widget.userId,
+        storeId: widget.storeId,
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +48,14 @@ class _HomeState extends State<Home> {
       ),
       bottomNavigationBar: FFNavigationBar(
         theme: FFNavigationBarTheme(
-            barBackgroundColor: Theme.of(context).colorScheme.primary,
-            selectedItemBackgroundColor:
-                Theme.of(context).colorScheme.background,
-            selectedItemIconColor: Theme.of(context).colorScheme.secondary,
-            selectedItemLabelColor: Theme.of(context).colorScheme.secondary,
-            unselectedItemIconColor: appWhite,
-            unselectedItemLabelColor: appBlack,
-            selectedItemBorderColor: Theme.of(context).colorScheme.primary),
+          barBackgroundColor: Theme.of(context).colorScheme.primary,
+          selectedItemBackgroundColor: Theme.of(context).colorScheme.background,
+          selectedItemIconColor: Theme.of(context).colorScheme.secondary,
+          selectedItemLabelColor: Theme.of(context).colorScheme.secondary,
+          unselectedItemIconColor: appWhite,
+          unselectedItemLabelColor: appBlack,
+          selectedItemBorderColor: Theme.of(context).colorScheme.primary,
+        ),
         selectedIndex: selectedIndex,
         onSelectTab: (index) {
           setState(() {

@@ -53,7 +53,6 @@ class _ExpensesState extends State<Expenses> {
     } catch (e) {
       throw Exception(e);
     } finally {
-      // Set isLoading to false when data fetching completes (success or failure)
       setState(() {
         isLoading = false;
       });
